@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>События</title>
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <table class="table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+  <form id="addEvent" action="">
+    
+    <div>
+      <select id="eventType">
+        <option value="default">Встреча</option>
+        <option value="birthDay">День Рождения</option>
+        <option value="custom">Другое</option>
+      </select>
+    </div>
+    <div>
+      <label for="date">Дата:</label>
+      <input type="date" id="date" name="event_date"
+       value="2022-01-23"
+       min="2021-12-01" max="2025-12-31">
+    </div>
+    <div>
+      <label for="hours">Часы:</label>
+      <input list="hoursOptions" id="hours" name="event_hours" />
+      <datalist id="hoursOptions">
+        <option value="00">
+        <option value="01">
+        <option value="02">
+        <option value="03">
+        <option value="04">
+        <option value="05">
+        <option value="06">
+        <option value="07">
+        <option value="08">
+        <option value="09">
+        <option value="10">
+        <option value="11">
+        <option value="12">
+        <option value="13">
+        <option value="14">
+        <option value="15">
+        <option value="16">
+        <option value="17">
+        <option value="18">
+        <option value="19">
+        <option value="20">
+        <option value="21">
+        <option value="22">
+        <option value="23">
+      </datalist>
+      <label for="minuts">Минуты:</label>
+      <input list="minutsOptions" id="minuts" name="event_minuts" />
+      <datalist id="minutsOptions">
+        <option value="00">
+        <option value="05">
+        <option value="10">
+        <option value="15">
+        <option value="20">
+        <option value="25">
+        <option value="30">
+        <option value="35">
+        <option value="40">
+        <option value="45">
+        <option value="50">
+        <option value="55">
+      </datalist>
+    </div>
+    <div>
+      <label for="description">Описание:</label>
+      <input type="text" id="description" name="event_description" />
+    </div>
+    <div>
+      <label for="place">Место:</label>
+      <input type="text" id="place" name="event_place" />
+    </div>
+    <div>
+      <label for="person">Человек:</label>
+      <input type="text" id="person" name="event_person" />
+    </div>
+    <div>
+      <label for="hero">Именинник:</label>
+      <input type="text" id="hero" name="event_hero" />
+    </div>
+    <div>
+      <label for="age">Возраст (0-130):</label>
+      <input type="number" id="age" name="event_age" min="0" max="130" />
+    </div>
+    <div>
+      <button type="button" id="add" name="add_button">Добавить событие</button>
+    </div>
+
+  </form>
+  <script src="index.js"></script>
+</body>
+
+</html>
