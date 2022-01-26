@@ -5,7 +5,7 @@
   overflow: hidden;
   font-weight: bold;
   /* Расположим форму по центру страницы */
-  margin: 0 auto;
+  margin: 0 auto 30px;
   width: clamp(600px,100%,1600px);
 }
 

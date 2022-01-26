@@ -22,7 +22,7 @@ class BirthDay extends Event {
       Object.entries(this)
         .reduce(function (previous, entry) {
           return (
-            previous + `  ${entry[0]}: ${entry[1] ? `"${entry[1]}"` : null},\n`
+            previous + `  "${entry[0]}": ${entry[1] ? `"${entry[1]}"` : null},\n`
           );
         }, "{\n")
         .slice(0, -2) + "\n}" // .slice(0, -2) для красоты убираю запятую после последнего свойства
@@ -44,7 +44,7 @@ class Meeting extends Event {
       Object.entries(this)
         .reduce(function (previous, entry) {
           return (
-            previous + `  ${entry[0]}: ${entry[1] ? `"${entry[1]}"` : null},\n`
+            previous + `  "${entry[0]}": ${entry[1] ? `"${entry[1]}"` : null},\n`
           );
         }, "{\n")
         .slice(0, -2) + "\n}" // .slice(0, -2) для красоты убираю запятую после последнего свойства
@@ -65,7 +65,7 @@ class Custom extends Event {
       Object.entries(this)
         .reduce(function (previous, entry) {
           return (
-            previous + `  ${entry[0]}: ${entry[1] ? `"${entry[1]}"` : null},\n`
+            previous + `  "${entry[0]}": ${entry[1] ? `"${entry[1]}"` : null},\n`
           );
         }, "{\n")
         .slice(0, -2) + "\n}" // .slice(0, -2) для красоты убираю запятую после последнего свойства
@@ -112,83 +112,58 @@ class Events {
     return this.events;
   }
 }
-/*
-function initEventTypeSelector() {
-  const eventTypeSelect = document.getElementById("eventTypeSelect");
-  const themeStylesheetLink = document.getElementById("themeStylesheetLink");
-  const currentEvents = localStorage.getItem("events") || new Events();
-
-  function addEvent(themeName) {
-      themeStylesheetLink.setAttribute("href", `css/themes/${themeName}.css`);
-  }
-
-  themeSelect.addEventListener("change", () => {
-      activateTheme(themeSelect.value);
-      localStorage.setItem("events", themeSelect.value);
-  });
-
-
-  themeSelect.value = currentTheme;
-  activateTheme(currentTheme);
-}
-
-initThemeSelector();*/
-
-async function loadIntoTable(url, table) {
-  const response = await fetch(url);
-  const { headers, rows } = await response.json();
-  table.innerHTML = `
-    <thead><tr>${headers.map((itm)=>{
-      return `<th>${itm}</th>`
-    },"").join("")}</tr></thead>
-
-    <tbody>${rows.map((itm)=>{
-      return `<tr>${
-        itm.map((i)=>{
-          return `<td>${i || ""}</td>`
-        },'').join("")
-      }</tr>`
-    },'').join('')}</tbody>
-`
-}
+const eventsList = new Events();
 
 const button = document.getElementById("add");
 
-button.addEventListener('click', event => {
-  switch (event.eventType) {
-    case "Другое":
-      Events.add(
+button.addEventListener('click', e => {
+  const event = {
+    type: document.getElementById("eventType").value,
+    date: document.getElementById("date").value,
+    time: {
+      hours: document.getElementById("hours").value,
+      minutes: document.getElementById("minutes").value
+    },
+    description: document.getElementById("description").value,
+    place: document.getElementById("place").value,
+    person: document.getElementById("person").value,
+    hero: document.getElementById("hero").value,
+    age: document.getElementById("age").value
+  }
+  switch (event.type) {
+    case "custom":
+      eventsList.add(
         new Custom({
           date: event.date,
           time:
           event.time.hours +
             ":" +
-            event.time.minuts,
+            event.time.minutes,
           description: event.description
         })
       );
       break;
-    case "Встреча":
-      Events.add(
+    case "meeting":
+      eventsList.add(
         new Meeting({
           date: event.date,
           time:
           event.time.hours +
             ":" +
-            event.time.minuts,
+            event.time.minutes,
           place: event.place,
           person: event.person
         })
       );
       break;
-    case "День Рождения":
-      Events.add(
+    case "birthDay":
+      eventsList.add(
         new BirthDay({
           date: event.date,
           time:
           event.time.hours +
             ":" +
-            event.time.minuts,
+            event.time.minutes,
           place: event.place,
           hero: event.hero,
           age: event.age
@@ -196,6 +171,27 @@ button.addEventListener('click', event => {
       );
       break;
   }
-});
 
-loadIntoTable("./data.json",document.querySelector("table"));
+
+  function loadIntoTable(events, table) {
+  const headers = ["Date", "Time", "Description", "Place", "Person", "Hero", "Age"];
+  const rows = events;
+  table.innerHTML = `
+    <thead><tr>${headers.map((itm)=>{
+      return `<th>${itm}</th>`
+    },"").join("")}</tr></thead>
+
+    <tbody>${rows.map((itm)=>{
+      return `<tr>${
+        Object.values(itm).map((i)=>{
+          return `<td>${i || ""}</td>`
+        },'').join("")
+      }</tr>`
+    },'').join('')}</tbody>
+`
+}
+
+  console.log(event);
+  console.log(JSON.parse(eventsList.show()));
+  loadIntoTable(JSON.parse(eventsList.show()),document.querySelector("table"));
+});
