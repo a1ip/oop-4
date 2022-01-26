@@ -112,11 +112,32 @@ class Events {
     return this.events;
   }
 }
+
+function loadIntoTable(events, table) {
+  const headers = ["Date", "Time", "Description", "Place", "Person", "Hero", "Age"];
+  const rows = events;
+  table.innerHTML = `
+    <thead><tr>${headers.map((itm)=>{
+      return `<th>${itm}</th>`
+    },"").join("")}</tr></thead>
+
+    <tbody>${rows.map((itm)=>{
+      return `<tr>${
+        Object.values(itm).map((i)=>{
+          return `<td>${i || ""}</td>`
+        },'').join("")
+      }</tr>`
+    },'').join('')}</tbody>
+`
+}
+
 const eventsList = new Events();
 
-const button = document.getElementById("add");
+const collection = document.querySelector("table");
 
-button.addEventListener('click', e => {
+const addButton = document.getElementById("add");
+
+addButton.addEventListener('click', e => {
   const event = {
     type: document.getElementById("eventType").value,
     date: document.getElementById("date").value,
@@ -172,26 +193,19 @@ button.addEventListener('click', e => {
       break;
   }
 
-
-  function loadIntoTable(events, table) {
-  const headers = ["Date", "Time", "Description", "Place", "Person", "Hero", "Age"];
-  const rows = events;
-  table.innerHTML = `
-    <thead><tr>${headers.map((itm)=>{
-      return `<th>${itm}</th>`
-    },"").join("")}</tr></thead>
-
-    <tbody>${rows.map((itm)=>{
-      return `<tr>${
-        Object.values(itm).map((i)=>{
-          return `<td>${i || ""}</td>`
-        },'').join("")
-      }</tr>`
-    },'').join('')}</tbody>
-`
-}
-
-  console.log(event);
-  console.log(JSON.parse(eventsList.show()));
-  loadIntoTable(JSON.parse(eventsList.show()),document.querySelector("table"));
+loadIntoTable(JSON.parse(eventsList.show()),collection);
 });
+
+const sortByDateButton = document.getElementById("sortByDate");
+
+sortByDateButton.addEventListener('click', e => {
+  eventsList.sortByDate()
+  loadIntoTable(JSON.parse(eventsList.show()),collection);
+})
+
+const sortByTimeButton = document.getElementById("sortByTime");
+
+sortByTimeButton.addEventListener('click', e => {
+  eventsList.sortByTime()
+  loadIntoTable(JSON.parse(eventsList.show()),collection);
+})

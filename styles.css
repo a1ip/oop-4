@@ -5,7 +5,7 @@
   overflow: hidden;
   font-weight: bold;
   /* Расположим форму по центру страницы */
-  margin: 0 auto 30px;
+  margin: 30px auto;
   width: clamp(600px,100%,1600px);
 }
 
@@ -28,6 +28,12 @@
   border-bottom: 2px solid #009578;
 }
 
+.sort {
+  /* Расположим кнопки по центру страницы */
+  margin: 0 auto;
+  width: clamp(400px,70%,800px);
+  text-align: center;
+}
 
 form {
   /* Расположим форму по центру страницы */
