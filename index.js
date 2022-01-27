@@ -131,49 +131,7 @@ function loadIntoTable(events, table) {
 `
 }
 
-const eventsList = new Events();
-
-const eventType = document.getElementById("eventType");
-
-eventType.addEventListener('change', e => {
-  const fields = {
-    type: document.getElementById("eventType"),
-    description: document.querySelector(".description"),
-    place: document.querySelector(".place"),
-    person: document.querySelector(".person"),
-    hero: document.querySelector(".hero"),
-    age: document.querySelector(".age")
-  };
-  switch (fields.type.value) {
-    case "custom":
-      fields.description.classList.remove("hidden");
-      fields.place.classList.add("hidden");
-      fields.person.classList.add("hidden");
-      fields.hero.classList.add("hidden");
-      fields.age.classList.add("hidden");
-      break;
-    case "meeting":
-      fields.description.classList.add("hidden");
-      fields.place.classList.remove("hidden");
-      fields.person.classList.remove("hidden");
-      fields.hero.classList.add("hidden");
-      fields.age.classList.add("hidden");
-      break;
-    case "birthDay":
-      fields.description.classList.add("hidden");
-      fields.place.classList.remove("hidden");
-      fields.person.classList.add("hidden");
-      fields.hero.classList.remove("hidden");
-      fields.age.classList.remove("hidden");
-      break;
-  }
-})
-
-const collection = document.querySelector("table");
-
-const addButton = document.getElementById("add");
-
-addButton.addEventListener('click', e => {
+function add () {
   const event = {
     type: document.getElementById("eventType").value,
     date: document.getElementById("date").value,
@@ -228,8 +186,58 @@ addButton.addEventListener('click', e => {
       );
       break;
   }
+}
 
 loadIntoTable(JSON.parse(eventsList.show()),collection);
+
+const eventsList = new Events();
+
+const eventType = document.getElementById("eventType");
+
+eventType.addEventListener('change', e => {
+  const fields = {
+    type: document.getElementById("eventType"),
+    description: document.querySelector(".description"),
+    place: document.querySelector(".place"),
+    person: document.querySelector(".person"),
+    hero: document.querySelector(".hero"),
+    age: document.querySelector(".age")
+  };
+  switch (fields.type.value) {
+    case "custom":
+      fields.description.classList.remove("hidden");
+      fields.place.classList.add("hidden");
+      fields.person.classList.add("hidden");
+      fields.hero.classList.add("hidden");
+      fields.age.classList.add("hidden");
+      break;
+    case "meeting":
+      fields.description.classList.add("hidden");
+      fields.place.classList.remove("hidden");
+      fields.person.classList.remove("hidden");
+      fields.hero.classList.add("hidden");
+      fields.age.classList.add("hidden");
+      break;
+    case "birthDay":
+      fields.description.classList.add("hidden");
+      fields.place.classList.remove("hidden");
+      fields.person.classList.add("hidden");
+      fields.hero.classList.remove("hidden");
+      fields.age.classList.remove("hidden");
+      break;
+  }
+})
+
+const collection = document.querySelector("table");
+
+const addButton = document.getElementById("add");
+
+addButton.addEventListener('click', e => {
+  add();
+});
+
+addButton.addEventListener('touchend', e => {
+  add();
 });
 
 const sortByDateButton = document.getElementById("sortByDate");
