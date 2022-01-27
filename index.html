@@ -25,6 +25,7 @@
   <form id="addEvent" action="">
     
     <div>
+      <label for="eventType">Что за событие:</label>
       <select id="eventType">
         <option value="meeting">Встреча</option>
         <option value="birthDay">День Рождения</option>
@@ -83,23 +84,23 @@
         <option value="55">
       </datalist>
     </div>
-    <div>
+    <div class="description hidden">
       <label for="description">Описание:</label>
       <input type="text" id="description" name="event_description" />
     </div>
-    <div>
+    <div class="place">
       <label for="place">Место:</label>
       <input type="text" id="place" name="event_place" />
     </div>
-    <div>
+    <div class="person">
       <label for="person">Человек:</label>
       <input type="text" id="person" name="event_person" />
     </div>
-    <div>
+    <div class="hero hidden">
       <label for="hero">Именинник:</label>
       <input type="text" id="hero" name="event_hero" />
     </div>
-    <div>
+    <div class="age hidden">
       <label for="age">Возраст (0-130):</label>
       <input type="number" id="age" name="event_age" min="0" max="130" />
     </div>

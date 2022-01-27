@@ -114,16 +114,16 @@ class Events {
 }
 
 function loadIntoTable(events, table) {
-  const headers = ["Date", "Time", "Description", "Place", "Person", "Hero", "Age"];
+  const headers = ["Дата", "Время", "Описание", "Место", "С кем встреча", "Именинник", "Возраст"];
   const rows = events;
   table.innerHTML = `
     <thead><tr>${headers.map((itm)=>{
       return `<th>${itm}</th>`
     },"").join("")}</tr></thead>
 
-    <tbody>${rows.map((itm)=>{
+    <tbody>${rows.map((e)=>{
       return `<tr>${
-        Object.values(itm).map((i)=>{
+        [e.date, e.time, e.description, e.place, e.person, e.hero, e.age].map((i)=>{
           return `<td>${i || ""}</td>`
         },'').join("")
       }</tr>`
@@ -132,6 +132,42 @@ function loadIntoTable(events, table) {
 }
 
 const eventsList = new Events();
+
+const eventType = document.getElementById("eventType");
+
+eventType.addEventListener('change', e => {
+  const fields = {
+    type: document.getElementById("eventType"),
+    description: document.querySelector(".description"),
+    place: document.querySelector(".place"),
+    person: document.querySelector(".person"),
+    hero: document.querySelector(".hero"),
+    age: document.querySelector(".age")
+  };
+  switch (fields.type.value) {
+    case "custom":
+      fields.description.classList.remove("hidden");
+      fields.place.classList.add("hidden");
+      fields.person.classList.add("hidden");
+      fields.hero.classList.add("hidden");
+      fields.age.classList.add("hidden");
+      break;
+    case "meeting":
+      fields.description.classList.add("hidden");
+      fields.place.classList.remove("hidden");
+      fields.person.classList.remove("hidden");
+      fields.hero.classList.add("hidden");
+      fields.age.classList.add("hidden");
+      break;
+    case "birthDay":
+      fields.description.classList.add("hidden");
+      fields.place.classList.remove("hidden");
+      fields.person.classList.add("hidden");
+      fields.hero.classList.remove("hidden");
+      fields.age.classList.remove("hidden");
+      break;
+  }
+})
 
 const collection = document.querySelector("table");
 
