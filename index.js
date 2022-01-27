@@ -131,7 +131,7 @@ function loadIntoTable(events, table) {
 `
 }
 
-function add () {
+function add() {
   const event = {
     type: document.getElementById("eventType").value,
     date: document.getElementById("date").value,
@@ -186,9 +186,8 @@ function add () {
       );
       break;
   }
+  loadIntoTable(JSON.parse(eventsList.show()),collection);
 }
-
-loadIntoTable(JSON.parse(eventsList.show()),collection);
 
 const eventsList = new Events();
 
@@ -247,9 +246,19 @@ sortByDateButton.addEventListener('click', e => {
   loadIntoTable(JSON.parse(eventsList.show()),collection);
 })
 
+sortByDateButton.addEventListener('touchend', e => {
+  eventsList.sortByDate()
+  loadIntoTable(JSON.parse(eventsList.show()),collection);
+});
+
 const sortByTimeButton = document.getElementById("sortByTime");
 
 sortByTimeButton.addEventListener('click', e => {
   eventsList.sortByTime()
   loadIntoTable(JSON.parse(eventsList.show()),collection);
 })
+
+sortByTimeButton.addEventListener('touchend', e => {
+  eventsList.sortByDate()
+  loadIntoTable(JSON.parse(eventsList.show()),collection);
+});
