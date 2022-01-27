@@ -109,6 +109,18 @@ button {
   margin-left: .5em;
 }
 
-.disabled {
-  display: none;
+#date {
+  width: clamp(6em,65%,8em);
+}
+
+#hours, #minutes {
+  width: clamp(2em,65%,2.5em);
+}
+
+#age {
+  width: clamp(2em,65%,3.5em);
+}
+
+label.minutes {
+  width: 0.5em;
 }
