@@ -110,7 +110,7 @@ button {
 }
 
 #date {
-  width: clamp(6em, 25%, 8em);
+  width: clamp(6em, 30%, 8em);
 }
 
 #hours, #minutes, #age{
