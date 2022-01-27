@@ -110,15 +110,11 @@ button {
 }
 
 #date {
-  width: clamp(6em,65%,8em);
+  width: clamp(6em, 25%, 8em);
 }
 
-#hours, #minutes {
-  width: clamp(2em,65%,2.5em);
-}
-
-#age {
-  width: clamp(2em,65%,3.5em);
+#hours, #minutes, #age{
+  width: clamp(3em, 5%, 3.5em);
 }
 
 label.minutes {
