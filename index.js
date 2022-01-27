@@ -233,32 +233,35 @@ const addButton = document.getElementById("add");
 
 addButton.addEventListener('click', e => {
   add();
-});
+},false);
 
 addButton.addEventListener('touchend', e => {
+  e.preventDefault();
   add();
-});
+},false);
 
 const sortByDateButton = document.getElementById("sortByDate");
 
 sortByDateButton.addEventListener('click', e => {
-  eventsList.sortByDate()
+  eventsList.sortByDate();
   loadIntoTable(JSON.parse(eventsList.show()),collection);
-})
+},false)
 
 sortByDateButton.addEventListener('touchend', e => {
-  eventsList.sortByDate()
+  e.preventDefault();
+  eventsList.sortByDate();
   loadIntoTable(JSON.parse(eventsList.show()),collection);
-});
+},false);
 
 const sortByTimeButton = document.getElementById("sortByTime");
 
 sortByTimeButton.addEventListener('click', e => {
-  eventsList.sortByTime()
+  eventsList.sortByTime();
   loadIntoTable(JSON.parse(eventsList.show()),collection);
-})
+},false)
 
 sortByTimeButton.addEventListener('touchend', e => {
-  eventsList.sortByDate()
+  e.preventDefault();
+  eventsList.sortByDate();
   loadIntoTable(JSON.parse(eventsList.show()),collection);
-});
+},false);
